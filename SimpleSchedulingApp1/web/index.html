@@ -1,16 +1,82 @@
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Simple schedulling</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <script src="jquery.js" type="text/javascript"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script> 
+            $(document).ready(function(){
+                $('#buttonSave').click(function(){
+                    var varci=$("#textCi").val();
+                    var varnombre=$("#textFirstName").val();
+                    var varapellido=$("#textLastName").val();
+                    var varclases=$("#textClassCodes").val();
+                    datos={"studentId":varci,"lastName":varapellido,"firstName":varnombre,"classCodes":varclases}
+                    $.ajax({
+                        type:"POST",
+                        url:"http://localhost:8080/SimpleSchedulingApp1/api/v1/students",
+                        contentType:"application/json",
+                        dataType:"text",
+                        data: JSON.stringify(datos)
+                    }).done(function(msg){
+                        console.log("Se inserto correctamente!");
+                    });
+                });
+            });     
+        </script>
+    </head>    
+        
+   
     <body>
-        <div>TODO write content</div>
+    	<form class="form-horizontal">
+		<fieldset>
+			<!-- Form Name -->
+			<legend>Students</legend>
+			<!-- Text input-->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="textCi">CI</label>  
+			  <div class="col-md-4">
+			  <input id="textCi" name="ci" placeholder="C.I." class="form-control input-md" type="text">
+			    
+			  </div>
+			</div>
+			<!-- Text input-->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="textFirstName">First Name</label>  
+			  <div class="col-md-4">
+			  <input id="textFirstName" name="textFirstName" placeholder="First Name" class="form-control input-md" type="text">
+			    
+			  </div>
+			</div>
+			<!-- Text input-->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="txtLastName">Last Name</label>  
+			  <div class="col-md-4">
+			  <input id="textLastName" name="txtLastName" placeholder="Last Name" class="form-control input-md" type="text">
+			    
+			  </div>
+			</div>
+			<!-- Text input-->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="textClassCodes">Classes </label>  
+			  <div class="col-md-4">
+			  <input id="textClassCodes" name="textClassCodes" placeholder="Classes coma and space separed" class="form-control input-md" type="text">
+			    
+			  </div>
+			</div>
+			<!-- Button (Double) -->
+			<div class="form-group">
+			  <label class="col-md-4 control-label" for="buttonSave"></label>
+			  <div class="col-md-8">
+			    <button id="buttonSave" name="buttonSave" class="btn btn-success" value="Insertar" >Save Button</button>
+			    <button id="buttonCanel" name="buttonCanel" class="btn btn-danger">Cancel Button</button>
+			  </div>
+			</div>
+		</fieldset>
+        </form>
     </body>
 </html>
